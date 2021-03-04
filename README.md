@@ -1,5 +1,5 @@
 README.md
 ===
 
-#hexo + github pages建立博客
+hexo + github pages建立博客
 ---
