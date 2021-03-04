@@ -1,3 +1,3 @@
----
-title: Hexo 建站 | Github
----
+##README.md
+
+#hexo + github pages建立博客
