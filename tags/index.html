@@ -2,43 +2,43 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>相册</title>
-        <style type="text/css">
-            img{width:420px;height:580px;}
-            div{    
-                width:420px;
-                height:580px;
-                position:absolute;
-                left:0;top:0;right:0;bottom:0;
-                margin:auto;
-                transform-style: preserve-3d;
-                transition: all 12s;
-                background:url(../img/img2.jpg);
-                background-size: 100% 100%;
+        <title>随笔</title>
+        <style>
+            body{
+                background: url(/img/bg66.jpg) no-repeat;
+                background-size: cover;
             }
-            div img{
+            .box {
+                width: 100%;
+                height: 800px;
+                position: relative;
+            }
+            .box>div{
+                width: 500px;
+                height: 100px;
                 position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%,-50%);
             }
-            div img:nth-child(1){transform: translateZ(500px);}
-            div img:nth-child(2){transform: rotateY(60deg) translateZ(500px) ;}
-            div img:nth-child(3){transform: rotateY(120deg) translateZ(500px) ;}
-            div img:nth-child(4){transform: rotateY(180deg) translateZ(500px) ;}
-            div img:nth-child(5){transform: rotateY(240deg) translateZ(500px) ;}
-            div img:nth-child(6){transform: rotateY(300deg) translateZ(500px) ;}
-            div:hover{
-                transform: rotateY(720deg) rotateX(45deg);
+            h1{
+                font-family: 'Times New Roman', Times, serif;
+                text-align: center;
+                color:white;
+            }
+            h1 a{
+                text-decoration: none;
+                color: white;
             }
         </style>
     </head>
-    <body bgcolor="#808080">
-        <div>
-            <img src="/img/1.jpg" alt="" />
-            <img src="/img/2.jpg" alt="" />
-            <img src="/img/3.jpeg" alt="" />
-            <img src="/img/4.jpeg" alt="" />
-            <img src="/img/5.jpg" alt="" />
-            <img src="../img/img6.jpg" alt="" />
-        </div>
-        <audio src="../img/gaobaiqiqiu.mp3" autoplay="autoplay" loop="loop"></audio>
+    <body>
+        <div class="box">
+            <div>
+                <h1><a href="http://localhost:4000/">网络工程师的进阶之路</h1>
+                <audio src="/img/xcdh.mp3" autoplay="autoplay" loop="loop"></audio>
+            </div>
+         </div>
+        
     </body>
 </html>
