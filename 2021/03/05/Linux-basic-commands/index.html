@@ -16,7 +16,7 @@
 <meta property="og:description" content="linux 学习之路Linux shell基础创建多个用户 etc\passwd 文件解释1用户：口令：用户标识号：组标识号：注释性描述符：主目录：登陆shell 创建多用户，read -r userid name 会读取完 users.csv文件返回False，while就会执行结束1234567input&#x3D;&quot;users.csv&quot;while IFS&#x3D;&amp;#x27;,&amp;#x27;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-05T10:58:07.000Z">
-<meta property="article:modified_time" content="2021-03-05T12:22:00.750Z">
+<meta property="article:modified_time" content="2021-03-06T02:59:42.215Z">
 <meta property="article:author" content="XYD">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="shell">
@@ -177,7 +177,11 @@
 <li><code>etc\passwd</code> 文件解释<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户：口令：用户标识号：组标识号：注释性描述符：主目录：登陆shell</span><br></pre></td></tr></table></figure></li>
 <li>创建多用户，<code>read -r userid name </code>会读取完 <code>users.csv</code>文件返回<code>False</code>，<code>while</code>就会执行结束<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">input=<span class="string">&quot;users.csv&quot;</span></span><br><span class="line"><span class="keyword">while</span> IFS=<span class="string">&#x27;,&#x27;</span> read -r userid name </span><br><span class="line"><span class="keyword">do</span> </span><br><span class="line">    echo <span class="string">&quot;adding $userid&quot;</span></span><br><span class="line">    useradd -c &quot;$name&quot; -m $userid #-c 用户描述 -m 如果没有主目录将创建</span><br><span class="line">done &lt; &quot;$input&quot;   #输入重定向</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <span id="more"></span></li>
-<li>shell中变量的含义解释<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$ shell本身的PID</span><br><span class="line">$! 最后运行的后台Process的PID</span><br><span class="line">$? 最后运行命令的结束代码（返回值）</span><br><span class="line">$- 使用set命令的Flag一览</span><br><span class="line">$* 所有参数列表 以“$1 $2 ... $n”的形式输出</span><br><span class="line">$@ 所有参数列表 以&quot;$1&quot;$2&quot;&quot;...&quot;&quot;$n&quot;的形式输出</span><br><span class="line">$# 条加到shell的参数个数</span><br><span class="line">$0 shell本身的文件名</span><br></pre></td></tr></table></figure></li>
+<li>shell中变量的含义解释<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$$ shell本身的PID</span><br><span class="line">$! 最后运行的后台Process的PID</span><br><span class="line">$? 最后运行命令的结束代码（返回值）</span><br><span class="line">$- 使用set命令的Flag一览</span><br><span class="line">$* 所有参数列表 以“$1 $2 ... $n”的形式输出</span><br><span class="line">$@ 所有参数列表 以&quot;$1&quot;$2&quot;&quot;...&quot;&quot;$n&quot;的形式输出</span><br><span class="line">$# 条加到shell的参数个数</span><br><span class="line">$0 shell本身的文件名</span><br></pre></td></tr></table></figure>
+简单示例：<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sum=$[ $<span class="number">1</span>*$<span class="number">2</span> ]</span><br><span class="line">echo <span class="string">&quot;Result is :&quot;</span></span><br><span class="line">echo <span class="string">&quot;$sum&quot;</span></span><br><span class="line">~     </span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">udebu@udebuman:~/shellFile$ echo $?</span><br><span class="line"><span class="number">0</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<ul>
 <li>判断文件目录参数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-d 是否为目录类型</span><br><span class="line">-e 是否存在</span><br><span class="line">-f 是否为一般文件</span><br><span class="line">-r 当前用户是否有权限读取</span><br><span class="line">-w 当前用户是否有权限写入</span><br><span class="line">-x 当前用户是否有权限执行</span><br></pre></td></tr></table></figure></li>
 <li>字符串比较运算符<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x3D; 是否相等</span><br><span class="line">！&#x3D; 是否不同</span><br><span class="line">-z 是否为空</span><br></pre></td></tr></table></figure></li>
 <li>比较运算符<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">-eq 是否等于（equal）</span><br><span class="line">-ne 是否不等于（not equal）</span><br><span class="line">-gt 是否大于 （greater than）</span><br><span class="line">-lt 是否小于 （less than）</span><br><span class="line">-le 是否等于或小于 （less equal）</span><br><span class="line">-ge 是否大于或等于 （greater equal）</span><br></pre></td></tr></table></figure></li>
@@ -218,6 +222,15 @@
 
   
 <nav id="article-nav">
+  
+    <a href="/2021/03/08/Shell%E6%9E%84%E5%BB%BA%E5%9F%BA%E6%9C%AC%E8%84%9A%E6%9C%AC1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Shell构建基本脚本1
+        
+      </div>
+    </a>
   
   
     <a href="/2021/03/04/Markdown-docs/" id="article-nav-older" class="article-nav-link-wrap">
@@ -347,6 +360,18 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">github</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
@@ -359,23 +384,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">yilia</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">css</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">html</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">Hexo</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">github</a>
               </li>
             
             <div class="clearfix"></div>
