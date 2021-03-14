@@ -16,7 +16,7 @@
 <meta property="og:description" content="shell处理文本find、grep、xargs、sort、uniq、tr、cut、paste、wc、sed、awk 1.find文件查找查找txt和pdf文件find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf \&quot;) -print正则表达式查找find . regex &quot;.*\(\.txt|.\pdf\)$&quot;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-14T05:27:26.000Z">
-<meta property="article:modified_time" content="2021-03-14T12:32:42.690Z">
+<meta property="article:modified_time" content="2021-03-14T14:13:04.174Z">
 <meta property="article:author" content="XYD">
 <meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary">
@@ -173,7 +173,19 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="shell处理文本"><a href="#shell处理文本" class="headerlink" title="shell处理文本"></a>shell处理文本</h1><h2 id="find、grep、xargs、sort、uniq、tr、cut、paste、wc、sed、awk"><a href="#find、grep、xargs、sort、uniq、tr、cut、paste、wc、sed、awk" class="headerlink" title="find、grep、xargs、sort、uniq、tr、cut、paste、wc、sed、awk"></a>find、grep、xargs、sort、uniq、tr、cut、paste、wc、sed、awk</h2><ul>
-<li>1.find文件查找<br>查找txt和pdf文件<br><code>find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf \&quot;) -print</code><br>正则表达式查找<br><code>find . regex &quot;.*\(\.txt|.\pdf\)$&quot;</code><br>查找大于2k的文件<br><code>find . -type f -size +2k</code></li>
+<li><h3 id="1-find文件查找"><a href="#1-find文件查找" class="headerlink" title="1.find文件查找"></a>1.find文件查找</h3>查找txt和pdf文件<br><code>find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf \&quot;) -print</code><br>正则表达式查找<br><code>find . regex &quot;.*\(\.txt|.\pdf\)$&quot;</code><br>查找大于2k的文件<br><code>find . -type f -size +2k</code></li>
+</ul>
+<hr>
+<hr>
+<p>-type b/d/c/p/l/f #查是块设备、目录、字符设备、管道、符号链接、普通文件<br>-size #查长度为n字节的文件<br>-name filename #查找名为filename的文件<br>-perm #按执行权限查找<br>-user username #按文件属主查找<br>-mtime -n +n #按文件更改时间查找 -n为n天以内，+n反之<br>-atime -n +n #按文件访问时间<br>-ctime -n +n #按文件创建时间<br>-nogroup #查无有效属组的文件，即是文件不再/etc/groups中不存在<br>-nouser #查无有效属主的文件<br>-newer #f1 ！f2 #找比f1新比f2旧的文件<br>-depth #是查找进入子目录前向查找完目录<br>-follow #如果遇到符号链接，就跟踪链接所指的文件<br>-prune #忽略某一个目录</p>
+<span id="more"></span>
+<ul>
+<li><h3 id="2-grep的使用"><a href="#2-grep的使用" class="headerlink" title="2.grep的使用"></a>2.grep的使用</h3>grep用于过滤/搜索的特定字符，可以使用正则表达式能多种命令配合使用<br>实例：查找后缀有json文件中包含hexo字符串的文件，并打印出行<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep hexo *json</span><br></pre></td></tr></table></figure>
+规则表达式<br>^ 锚定行的开始 ‘^grep’匹配所有以grep开头的行<br>$ 锚定行的结束<br>. 匹配一个非换行符的字符 ‘gr.p’匹配gr后接一个人一字符，然后是p<br>* 匹配一个或多个先前字符<br>.* 一起用代表任意字符<br>[] 匹配一个指定范围内的字符<br>[^] 匹配不在指定范围内的字符<br>\(..\) 标记匹配字符 ‘\(hk\)’,hk标记为1<br>\&lt; 锚定单词的开始 ‘\&lt;grep’匹配包含以grep开头的单词的行<br>\&gt; 锚定单词的结束</li>
+<li><h3 id="3-xargs命令的作用"><a href="#3-xargs命令的作用" class="headerlink" title="3.xargs命令的作用"></a>3.xargs命令的作用</h3>xargs是将标准输入转为命令行参数<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;hello&quot;</span> | xargs echo</span><br><span class="line">#将管道左侧的标准输入，转为命令行参数hello</span><br><span class="line">hello </span><br></pre></td></tr></table></figure>
+xargs的作用在于大多数命令（比如rm、mkdir、ls）与|一起使用，都需要xargs将标准输入转为命令行参数<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo <span class="string">&quot;test file&quot;</span> | xagrs mkdir</span><br><span class="line">#等同于mkdir test file 如果不加xargs就会报错</span><br></pre></td></tr></table></figure>
+xargs单独使用命令默认是echo<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xargs</span><br><span class="line">#等同于</span><br><span class="line">xagrs echo</span><br></pre></td></tr></table></figure>
+输入xargs按下回车以后，命令行就会等待用户输入，作为标准输入。你可以输入任意内容，然后按下Ctrl d，表示输入结束，这时echo命令就会把前面的输入打印出来。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xargs</span><br><span class="line">hello (Ctrl + d)</span><br><span class="line">hello</span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
