@@ -16,7 +16,7 @@
 <meta property="og:description" content="shell处理文本find、grep、xargs、sort、uniq、tr、cut、paste、wc、sed、awk 1.find文件查找查找txt和pdf文件find . \( -name &quot;*.txt&quot; -o -name &quot;*.pdf \&quot;) -print正则表达式查找find . regex &quot;.*\(\.txt|.\pdf\)$&quot;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-14T05:27:26.000Z">
-<meta property="article:modified_time" content="2021-03-14T14:13:04.174Z">
+<meta property="article:modified_time" content="2021-03-19T09:20:55.244Z">
 <meta property="article:author" content="XYD">
 <meta property="article:tag" content="shell">
 <meta name="twitter:card" content="summary">
@@ -187,6 +187,20 @@ xargs的作用在于大多数命令（比如rm、mkdir、ls）与|一起使用�
 xargs单独使用命令默认是echo<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xargs</span><br><span class="line">#等同于</span><br><span class="line">xagrs echo</span><br></pre></td></tr></table></figure>
 输入xargs按下回车以后，命令行就会等待用户输入，作为标准输入。你可以输入任意内容，然后按下Ctrl d，表示输入结束，这时echo命令就会把前面的输入打印出来。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xargs</span><br><span class="line">hello (Ctrl + d)</span><br><span class="line">hello</span><br></pre></td></tr></table></figure></li>
 </ul>
+<hr>
+<p>PS：exec的使用<br>exec命令用于调用并执行指令的命令。exec命令通常用于shell脚本中，可以调用其他的俄命令。如果在当前终端中使用，这当指定的命令执行完毕后会立即退出终端。</p>
+<hr>
+<p>日志的定期清理</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">find directory -name <span class="string">&quot;file&quot;</span> -mtime +<span class="number">7</span> -exec rm -rf &#123;&#125; \;</span><br><span class="line">#定期清理7天以上的日志文件</span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li><h3 id="4-sort的使用"><a href="#4-sort的使用" class="headerlink" title="4.sort的使用"></a>4.sort的使用</h3>sort是linux的排序命令，而且根据不同类型来进行排序。sort将文件的每一行作为一个单位，相互比较。比较原则是从首字符向后，依次按ASCII码进行比较的，最后升序输出。<br>选项：</li>
+</ul>
+<p>-f：忽略大小写<br>-b：忽略每行前面的空白部分<br>-n：以数值类型进行排序，默认字符串排序<br>-r：方向排序<br>-u：删除重复行。uniq<br>-t：指定分隔符<br>-k[n,m]：按照指定的字段范围排序。n开始，m结束</p>
+<ul>
+<li><h3 id="5-uniq的使用"><a href="#5-uniq的使用" class="headerlink" title="5.uniq的使用"></a>5.uniq的使用</h3>uniq是用来报告或删除文件中重复的行</li>
+</ul>
+<p>-c 在输出前面加上每行在输入文件中出现的次数<br>-d 仅显示重复行<br>-u 仅显示不重复的行</p>
 
       
 
@@ -368,19 +382,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">shell</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">markdown</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">mysql</a>
               </li>
              
               <li class="article-tag-list-item">
